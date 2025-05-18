@@ -1,7 +1,7 @@
 
-# 🔥 IoT Environmental Monitoring System with Fire and Smoke Detection (ESP32)
+# IoT Environmental Monitoring System with Fire and Smoke Detection (ESP32)
 
-## 🌟 Project Benefits
+## Project Benefits
 
 This project is an **IoT-based environmental monitoring system** using an **ESP32** microcontroller. It integrates sensors for **temperature, humidity, smoke, carbon monoxide (CO), and dust** to:
 - Detect potential fire or smoke hazards in real-time.
@@ -11,7 +11,7 @@ This project is an **IoT-based environmental monitoring system** using an **ESP3
 
 ---
 
-## ⚙️ Hardware Requirements
+## Hardware Requirements
 
 - **ESP32** (microcontroller)
 - **DHT22** (temperature & humidity sensor)
@@ -24,7 +24,7 @@ This project is an **IoT-based environmental monitoring system** using an **ESP3
 
 ---
 
-## 📦 Required Libraries
+## Required Libraries
 
 - `WiFi.h`
 - `PubSubClient.h`
@@ -35,7 +35,7 @@ Install these via Arduino IDE Library Manager.
 
 ---
 
-## 📶 Configuration
+## Configuration
 
 - **Wi-Fi SSID**: `Jo`
 - **Password**: `1928374655`
@@ -45,9 +45,9 @@ Install these via Arduino IDE Library Manager.
 
 ---
 
-## 📚 Code Overview
+## Code Overview
 
-### 🔌 WiFi Setup
+### WiFi Setup
 
 ```cpp
 void setupWifi()
@@ -57,7 +57,7 @@ Connects the ESP32 to the configured Wi-Fi network and prints the local IP addre
 
 ---
 
-### 🔁 MQTT Reconnection
+### MQTT Reconnection
 
 ```cpp
 void reconnectMQTT()
@@ -67,7 +67,7 @@ Attempts to reconnect to the MQTT broker if disconnected, using client ID `ESP32
 
 ---
 
-### 🌡️ Read Temperature & Humidity
+### Read Temperature & Humidity
 
 ```cpp
 float readDHTTemperature()
@@ -78,7 +78,7 @@ Reads values from the DHT22 sensor. Returns 0 if the reading fails.
 
 ---
 
-### 🌫️ Dust Sensor Reading
+### Dust Sensor Reading
 
 ```cpp
 int readDustSensor()
@@ -88,7 +88,7 @@ Triggers the LED inside the dust sensor, reads analog value from dust pin, and c
 
 ---
 
-### 🧪 CO Conversion (MQ7)
+### CO Conversion (MQ7)
 
 ```cpp
 float convertMQ7(int rawValue)
@@ -98,7 +98,7 @@ Converts raw analog value into an estimated CO concentration in ppm using a basi
 
 ---
 
-### 📤 MQTT Publish
+### MQTT Publish
 
 ```cpp
 void publishSensorData(...)
@@ -108,7 +108,7 @@ Sends a JSON-formatted payload to the MQTT topic with sensor readings and enviro
 
 ---
 
-### 💡 Output Control
+### Output Control
 
 ```cpp
 void setOutputs(bool buzzer, bool red, bool yellow, bool green)
@@ -118,7 +118,7 @@ Controls the buzzer and LEDs (ON/OFF) based on the condition detected.
 
 ---
 
-### 🛠️ Setup
+### Setup
 
 ```cpp
 void setup()
@@ -130,7 +130,7 @@ void setup()
 
 ---
 
-### 🔁 Main Loop
+### Main Loop
 
 ```cpp
 void loop()
@@ -146,7 +146,7 @@ void loop()
 
 ---
 
-## 🧾 Example JSON Payload
+## Example JSON Payload
 
 ```json
 {
@@ -161,7 +161,7 @@ void loop()
 
 ---
 
-## 📝 Notes
+## Notes
 
 * For accurate CO measurement, calibrate the MQ7 sensor’s R0 resistance value.
 * MQTT data can be visualized using tools like Node-RED, ThingsBoard, or custom dashboards.
@@ -169,13 +169,13 @@ void loop()
 
 ---
 
-## 📄 License
+## License
 
 This project is open-source and free to use for educational and non-commercial purposes.
 
 ---
 
-## 👥 Contributors
+## Contributors
 
 Developed by **Group 8** - IoT Project 2025
 
