@@ -4,13 +4,13 @@
 #include <ArduinoJson.h>
 
 // WiFi Configuration
-const char* ssid = "Jo";  
-const char* password = "1928374655";
+const char* ssid = "Wifi_name";  // insert your wifi name 
+const char* password = "wifi_password"; // insert your wifi password
 
 // MQTT Configuration
 const char* mqtt_server = "broker.emqx.io";
 const int mqtt_port = 1883;
-const char* mqtt_topic = "IoT/group8";
+const char* mqtt_topic = "IoT/example"; // insert your mqtt topic
 
 // Sensor Pins
 #define DHTPIN 23
