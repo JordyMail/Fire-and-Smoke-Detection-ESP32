@@ -27,8 +27,8 @@ const char* mqtt_topic = "IoT/example"; // insert your mqtt topic
 #define LED_GREEN 14
 
 // Sensor Thresholds
-#define CO_WARNING_LEVEL 50    // ppm
-#define CO_DANGER_LEVEL 100    // ppm
+#define CO_WARNING_LEVEL 100    // ppm
+#define CO_DANGER_LEVEL 200    // ppm
 #define SMOKE_THRESHOLD 800    // raw value
 #define FIRE_THRESHOLD 1800    // raw value (MQ135)
 #define DUST_THRESHOLD 2000    // raw value
@@ -114,11 +114,23 @@ void publishSensorData(float temp, float humidity, int dust, float co, int mq135
   client.loop();
 
   StaticJsonDocument<256> doc;
-  doc["temperature"] = temp;
-  doc["humidity"] = humidity;
-  doc["dust"] = dust;
-  doc["co"] = co;
-  doc["air_quality"] = mq135;
+  doc["room_id"] = 1;
+  
+  JsonObject sensorData = doc.createNestedObject("sensorData");
+  
+  JsonObject dht22 = sensorData.createNestedObject("dht22");
+  dht22["temperature"] = temp;
+  dht22["humidity"] = humidity;
+  
+  JsonObject mq7 = sensorData.createNestedObject("mq7");
+  mq7["co"] = co;
+  
+  JsonObject dustObj = sensorData.createNestedObject("dust");
+  dustObj["dust"] = dust;
+  
+  JsonObject mq135Obj = sensorData.createNestedObject("mq135");
+  mq135Obj["air_quality"] = mq135;
+  
   doc["status"] = status;
 
   char payload[256];
@@ -175,38 +187,39 @@ void loop() {
   int mq135 = analogRead(MQ135_PIN);
   
   // Print sensor values
-  Serial.print("Temp: "); Serial.print(temperature); Serial.print("°C");
-  Serial.print(" | Humidity: "); Serial.print(humidity); Serial.print("%");
-  Serial.print(" | Dust: "); Serial.print(dust);
-  Serial.print(" | CO: "); Serial.print(co_ppm); Serial.print("ppm");
+  Serial.print(" | Temp: "); Serial.print(temperature); Serial.println("°C");
+  Serial.print(" | Humidity: "); Serial.print(humidity); Serial.println("%");
+  Serial.print(" | Dust: "); Serial.println(dust);
+  Serial.print(" | CO: "); Serial.print(co_ppm); Serial.println("ppm");
   Serial.print(" | Air Quality: "); Serial.println(mq135);
   
   // Determine status
-  String status = "Normal";
+  const char* status = "normal";
   bool buzzer = false;
   bool red = false;
   bool yellow = false;
   bool green = true;
   
-    // Check for fire conditions
-    if (mq135 > FIRE_THRESHOLD && temperature > TEMP_THRESHOLD && 
-        dust > DUST_THRESHOLD && humidity < HUMIDITY_LOW) {
-      status = "DANGER: Fire detected!";
-      buzzer = true;
-      red = true;
-      green = false;
-    } 
-    // Check for smoke
-    else if (mq135 > SMOKE_THRESHOLD && co_ppm > CO_WARNING_LEVEL) {
-      status = "WARNING: Smoke detected";
-      yellow = true;
-      green = false;
-    }
+  // Check for fire conditions
+  if (mq135 > FIRE_THRESHOLD && temperature > TEMP_THRESHOLD && 
+      dust > DUST_THRESHOLD && humidity < HUMIDITY_LOW) {
+    status = "fire";
+    buzzer = true;
+    red = true;
+    green = false;
+  } 
+  // Check for smoke
+  else if (mq135 > SMOKE_THRESHOLD && co_ppm > CO_WARNING_LEVEL) {
+    status = "smoke";
+    yellow = true;
+    green = false;
+  }
+  
   // Set outputs
   setOutputs(buzzer, red, yellow, green);
   
   // Publish data
-  publishSensorData(temperature, humidity, dust, co_ppm, mq135, status.c_str());
+  publishSensorData(temperature, humidity, dust, co_ppm, mq135, status);
   
   delay(1000); // Wait 1 second between readings
 }
