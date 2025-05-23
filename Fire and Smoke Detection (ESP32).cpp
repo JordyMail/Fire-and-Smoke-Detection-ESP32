@@ -30,8 +30,8 @@ const char* mqtt_topic = "IoT/example"; // insert your mqtt topic
 #define CO_WARNING_LEVEL 100    // ppm
 #define CO_DANGER_LEVEL 200    // ppm
 #define SMOKE_THRESHOLD 800    // raw value
-#define FIRE_THRESHOLD 1800    // raw value (MQ135)
-#define DUST_THRESHOLD 2000    // raw value
+#define FIRE_THRESHOLD 1800    // raw value (MQ135) // air quality
+#define DUST_THRESHOLD 2000    // raw value // air quality
 #define TEMP_THRESHOLD 45      // °C
 #define HUMIDITY_HIGH 70       // %
 #define HUMIDITY_LOW 30        // %
