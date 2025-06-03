@@ -47,6 +47,10 @@ Install these via Arduino IDE Library Manager.
 ## Monitoring Web
 click this <a href="https://github.com/JordyMail/iot-system-v1">Link</a> to direct you to the websiete monitorng repository
 
+## Sensor Design
+![CIRCUIT SMOKING DETECTION FIXXXX](https://github.com/user-attachments/assets/dafa3169-6f42-4310-9329-e16d24c4a585)
+
+
 ## Code Overview
 
 ### WiFi Setup
