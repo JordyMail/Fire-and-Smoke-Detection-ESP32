@@ -37,12 +37,12 @@ Install these via Arduino IDE Library Manager.
 
 ## Configuration
 
-- **Wi-Fi SSID**: `Jo`
-- **Password**: `1928374655`
+- **Wi-Fi SSID**: `Your-Wifi-name, example: jo-wifi`
+- **Password**: `Your-passowrd-name, example: 123`
 - **MQTT Broker**: `broker.emqx.io`
 - **Port**: `1883`
-- **MQTT Topic**: `IoT/group8`
-
+- **MQTT Topic**: `example: IoT/group8`
+  
 ---
 ## Monitoring Web
 click this <a href="https://github.com/JordyMail/iot-system-v1">Link</a> to direct you to the websiete monitorng repository
